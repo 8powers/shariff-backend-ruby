@@ -13,7 +13,7 @@ module ShariffBackend
         config.access_token_secret = ShariffBackend.configuration.access_token_secret
       end.search(url).count
     rescue
-      0
+      '' # return empty string
     end
   end
 end

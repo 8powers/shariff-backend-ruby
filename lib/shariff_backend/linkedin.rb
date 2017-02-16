@@ -9,12 +9,14 @@ module ShariffBackend
     def self.count(url)
       encoded = URI.escape(LINKEDIN_BASE_URL + url)
       response = HTTPClient.new.get(encoded)
-      parse(response) if response.ok?
+      response.ok? ? parse(response) : ''
     end
 
     def self.parse(response)
       json = JSON.parse(response.body)
       json['count']
+    rescue
+      ''
     end
   end
 end
