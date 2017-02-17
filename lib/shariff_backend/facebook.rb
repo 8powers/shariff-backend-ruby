@@ -8,7 +8,7 @@ module ShariffBackend
       query_url = "http://graph.facebook.com/?id=#{url}"
       encoded = URI.escape(query_url)
       response = HTTPClient.new.get(encoded)
-      parse(response) if response.ok?
+      response.ok? ? parse(response) : ''
     end
 
     def self.parse(response)
@@ -16,7 +16,7 @@ module ShariffBackend
       count = json['share']['share_count']
       count ? count : 0
     rescue
-      0
+      ''
     end
   end
 end

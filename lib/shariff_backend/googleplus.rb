@@ -11,14 +11,16 @@ module ShariffBackend
       url = "http://#{url}" unless /\Ahttps?:/.match(url)
       encoded = URI.escape(BUTTON_BASE_URL + url)
       response = HTTPClient.new.get(encoded)
-      parse(response.body) if response.ok?
+      response.ok? ? parse(response) : ''
     end
 
     # Just grok the response with a Regex to avoid pulling in
     # expensive dependencies
     def self.parse(response)
-      match_data = %r{<div [^>]*id=['"]aggregateCount['"][^>]*>([^<]+)</div>}.match(response)
+      match_data = %r{<div [^>]*id=['"]aggregateCount['"][^>]*>([^<]+)</div>}.match(response.body)
       match_data ? match_data[1] : '0'
+    rescue
+      ''  
     end
   end
 end
