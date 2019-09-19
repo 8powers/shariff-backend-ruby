@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'cuba', '~> 3.4.0'
-  s.add_dependency 'httpclient', '~> 2.6.0'
+  s.add_dependency 'httpclient', '~> 2.8.3'
   s.add_dependency 'rack-cache', '~> 1.2.0'
   s.add_dependency 'twitter'
 
